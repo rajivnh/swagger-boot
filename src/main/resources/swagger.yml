@@ -1,0 +1,65 @@
+openapi: 3.0.1
+info:
+  version: 1.0.1
+  title: Employee APIs
+tags:
+  - name: employee
+    description: Operations about Employee
+paths:
+  /employee/findAll:
+    get:
+      tags:
+        - employee
+      summary: Get all Employees
+      operationId: findAll
+      responses:
+        200:
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Employee'
+        404:
+          description: Employee records not found
+          content: { }
+  /employee/findById/{id}:
+    get:
+      tags:
+      - employee
+      summary: "Get Employee by ID"
+      operationId: findById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: Successful Operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Employee'
+        404:
+          description: Employee not found
+          content: { }
+          
+components:
+  schemas:
+    Employee:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        phoneNumber:
+          type: string
+        createdate:
+          type: string
+          format: date
+          example: 22-06-2021
+
